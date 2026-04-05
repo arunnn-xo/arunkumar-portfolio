@@ -22,13 +22,114 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.reveal-word {
+  animation: reveal-up 0.8s ease both;
+}
+
+.hero-name-text {
+  background-size: 200% 100%;
+  animation: reveal-up 0.8s ease both, text-shimmer 4s ease-in-out infinite;
+  will-change: background-position, opacity, transform;
+}
+
+.hero-glow-chip {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.hero-glow-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(129, 140, 248, 0.35);
+  box-shadow: 0 12px 30px rgba(56, 189, 248, 0.12);
+}
+
+.scroll-highlight-text {
+  text-shadow: 0 0 24px rgba(99, 102, 241, 0.08);
+}
+
+.scroll-accent-label {
+  position: relative;
+}
+
+.scroll-accent-label::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 1px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, rgba(129, 140, 248, 0.8), transparent);
+}
+
+.skill-reveal-item {
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.skill-reveal-item:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.strength-row {
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.strength-row:hover {
+  transform: translateX(6px);
+  color: #ecfeff;
+}
+
+.project-focus-title {
+  position: relative;
+  display: inline-block;
+}
+
+.project-focus-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.75), rgba(34, 211, 238, 0.15), transparent);
+  transform-origin: left;
+  transform: scaleX(0.5);
+  transition: transform 260ms ease;
+}
+
+.project-focus-title:hover::after {
+  transform: scaleX(1);
 }
 
 /* Vinyl spin animation */
 @keyframes vinyl-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .vinyl-spin {
