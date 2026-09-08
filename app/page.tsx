@@ -1,554 +1,689 @@
 "use client";
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Github,
   Linkedin,
   Mail,
   Phone,
-  Award,
-  Briefcase,
-  Star,
-  Download,
-  MessageCircle,
+  MapPin,
   ExternalLink,
   Code2,
-  User,
-  Play
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import MusicPlayer from './components/MusicPlayer';
-
-const INTRO_MIN_DURATION = 2600;
-const INTRO_MAX_DURATION = 4200;
+  Database,
+  Layout,
+  Cpu,
+  Cloud,
+  Smartphone,
+  Download,
+  Send,
+  GraduationCap,
+  ArrowUpRight,
+  MessageCircle,
+  Menu,
+  X,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // --- Portfolio Data ---
 const portfolioData = {
-  name: "ARUNKUMAR R",
+  name: "Arunkumar R",
+  role: "Junior Web Developer | Next.js, Express.js & AI-Powered Development",
   profilePicture: "/arun-profile.jpg",
   resumeUrl: "/ARUNR.pdf",
-  summary: "Detail-oriented M.Sc. IT graduate with hands-on experience in designing and deploying full-stack web applications. Proficient in modern technologies like React, Next.js, and Supabase to build user-centric solutions.",
+  badge: "Junior Web Developer • Next.js & Modern AI",
+  about: {
+    title: "I'm Arunkumar, a Junior Web Developer building modern web apps with Next.js & AI",
+    description:
+      "Currently working as a Junior Web Developer, building responsive, scalable web applications with Next.js and Express.js. I specialize in crafting clean, advance-level frontend UIs and leveraging today's top AI agents and foundation models to deliver fast, intelligent, and seamless web experiences.",
+    role: "Junior Web Developer",
+    coreStack: "Next.js & Express.js",
+    aiFocus: "AI Agents & Modern Models",
+    from: "Coimbatore, India",
+    degree: "M.Sc. Information Technology",
+    email: "arunkumarr09032003@gmail.com",
+    phone: "+91 90256 04721",
+  },
   contact: {
     email: "arunkumarr09032003@gmail.com",
-    phone: "+919025604721",
+    phone: "+91 90256 04721",
     whatsapp: "+919025604721",
+    location: "Coimbatore, Tamil Nadu, India",
     linkedin: "https://www.linkedin.com/in/your-profile",
     github: "https://github.com/charlie-xo?tab=packages",
   },
-  skills: {
-    intro: "Focused on building responsive, scalable, and user-friendly web applications with the modern React ecosystem.",
-    technical: [
-      {
-        title: "Frontend Engineering",
-        items: ["React.js", "Next.js", "JavaScript", "HTML5", "CSS3"],
-      },
-      {
-        title: "Backend & Data",
-        items: ["Node.js", "Supabase", "MySQL", "Authentication", "CRUD Workflows"],
-      },
-      {
-        title: "Deployment & Tools",
-        items: ["GitHub", "Vercel", "Responsive UI Development"],
-      },
-    ],
-    soft: ["Analytical Problem Solving", "Attention to Detail", "Collaborative Execution", "Adaptable Learning Mindset"],
-  },
-  projects: [
+  services: [
+    {
+      title: "Next.js & Frontend Engineering",
+      description: "High-end, responsive web interfaces built with Next.js, React 19, Tailwind CSS, and smooth Framer Motion micro-interactions.",
+      icon: <Code2 className="text-[#00DF81]" size={28} />,
+    },
+    {
+      title: "Express.js Backend & APIs",
+      description: "Clean server architectures, secure RESTful APIs, user authentication, and databases with MySQL & Supabase.",
+      icon: <Database className="text-[#00DF81]" size={28} />,
+    },
+    {
+      title: "AI Models & Smart Features",
+      description: "Integrating modern AI models (Claude, OpenAI, Gemini) to build smart web features, automated tools, and dynamic user experiences.",
+      icon: <Cpu className="text-[#00DF81]" size={28} />,
+    },
+    {
+      title: "Modern UI/UX Design",
+      description: "Crafting modern, creative, and intuitive website designs with clean layouts, dark aesthetic palettes, and subtle animations.",
+      icon: <Layout className="text-[#00DF81]" size={28} />,
+    },
+    {
+      title: "Full-Stack Web Delivery",
+      description: "End-to-end web applications engineered from responsive UI design to production cloud deployment on Vercel.",
+      icon: <Cloud className="text-[#00DF81]" size={28} />,
+    },
+    {
+      title: "Performance & Responsive Design",
+      description: "Pixel-perfect on mobile, tablet, and desktop, optimized for fast loading speeds, clean structure, and seamless usability.",
+      icon: <Smartphone className="text-[#00DF81]" size={28} />,
+    },
+  ],
+  liveProjects: [
+    {
+      title: "Yamora Resorts",
+      category: "Live Production • Full-Stack",
+      role: "Next.js & Express.js Developer",
+      description:
+        "Luxury resort and hospitality platform engineered with Next.js on the frontend and Express.js backend. Features interactive booking showcases, dynamic room catalogs, and high-performance asset delivery.",
+      tech: ["Next.js", "Express.js", "Tailwind CSS", "REST API"],
+      liveLink: "https://yamoraresorts.com/",
+    },
+    {
+      title: "Jams Marine Academy",
+      category: "Live Production • Frontend",
+      role: "Frontend Next.js Developer",
+      description:
+        "Modern educational portal and course catalog for a leading maritime academy. Built with responsive Next.js architecture, fast Core Web Vitals, and accessible course inquiry workflows.",
+      tech: ["Next.js", "React", "Tailwind CSS", "SEO & UI/UX"],
+      liveLink: "https://jamsmarine.edu.in/",
+    },
+    {
+      title: "Naveenam Naturals",
+      category: "Live Production • E-Commerce",
+      role: "E-commerce Web Developer",
+      description:
+        "Direct-to-consumer organic herbal e-commerce storefront. Designed with dynamic product showcase filtering, custom cart workflows, and mobile-first checkout experiences.",
+      tech: ["Next.js", "E-Commerce", "Tailwind CSS", "Payment Flows"],
+      liveLink: "https://naveenamnaturals.com/",
+    },
+  ],
+  academicProjects: [
     {
       title: "Uzhavar Sandhai - E-commerce App",
-      description: "Developed a full-stack e-commerce platform for farmers. Implemented secure user authentication, dynamic product listing, and order management.",
-      tech: ["Next.js", "React", "Supabase"],
+      category: "M.Sc. Academic Project",
+      description: "Developed a full-stack e-commerce platform for farmers during my Master's program. Implemented secure user authentication, dynamic product listing, and order management.",
+      tech: ["Next.js", "React", "Supabase", "Tailwind CSS"],
       liveLink: "https://uzhavar-sandhai-cbe.vercel.app",
     },
     {
       title: "Notes Web Application",
-      description: "Designed and built a secure, private notes application. Implemented robust user authentication to ensure each user's notes are private.",
-      tech: ["Next.js", "Supabase"],
+      category: "Full-Stack Learning Lab",
+      description: "Designed and built as a practical learning project exploring state management and private notes architecture with Supabase Auth and database rules.",
+      tech: ["Next.js", "Supabase Auth", "PostgreSQL"],
       liveLink: "https://notes-project-nine.vercel.app/login",
     },
     {
-      title: "Text-to-Image Creation",
-      description: "Built an application that integrates with the DALL-E API to generate images from user-provided text descriptions.",
-      tech: ["React", "DALL-E API"],
+      title: "Text-to-Image AI Engine",
+      category: "Self-Learning API Experiment",
+      description: "Built during self-study exploring modern generative AI APIs to generate high-resolution images from natural language text prompts.",
+      tech: ["React", "REST API", "DALL-E"],
+      liveLink: "#",
     },
     {
-      title: "Ecommerce Website",
-      description: "Created a functional e-commerce site using fundamental web technologies focusing on a clean user interface with a MySQL backend.",
-      tech: ["HTML", "CSS", "JavaScript", "MySQL"],
+      title: "Full-Stack Ecommerce Website",
+      category: "B.Sc. College Academic Project",
+      description: "Created during undergraduate studies to master core web fundamentals, focusing on clean interface design and relational MySQL operations.",
+      tech: ["HTML5", "CSS3", "JavaScript", "MySQL"],
+      liveLink: "#",
     },
   ],
   education: [
     {
       degree: "M.Sc. Information Technology",
       institution: "Hindusthan College of Arts and Science, Coimbatore",
-      period: "2023-2025",
-      cgpa: "7.9",
+      period: "2023 - 2025",
+      cgpa: "7.9 CGPA",
     },
     {
       degree: "B.Sc. Information Technology",
       institution: "Erode Arts and Science College, Erode",
-      period: "2020-2023",
-      cgpa: "7.5",
+      period: "2020 - 2023",
+      cgpa: "7.5 CGPA",
     },
   ],
 };
 
-// --- Animation Variants ---
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
-};
-
-const textRevealVariants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.75, ease: "easeOut" as any }
-  }
-};
-
-const attractStrip = [
-  "Responsive UI Focus",
-  "Modern React Stack",
-  "Clean Full-Stack Delivery",
-];
-
-const sectionEyebrowClass = "text-[0.7rem] uppercase tracking-[0.35em] text-indigo-300/70";
-const openPanelClass = "border-t border-white/10 py-6";
-
-// --- Reusable Components ---
-const Section = ({ id, title, icon, children }: { id: string; title: string; icon: ReactNode; children: ReactNode }) => (
-  <motion.section
-    id={id}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: "-100px" }}
-    variants={containerVariants}
-    className="py-12 px-6"
-  >
-    <div className="max-w-6xl mx-auto">
-      <div className="flex items-center gap-4 mb-8 md:mb-10">
-        <div className="p-3 rounded-full border border-indigo-400/20 bg-indigo-500/10 text-indigo-300">
-          {icon}
-        </div>
-        <div>
-          <motion.p variants={textRevealVariants} className={sectionEyebrowClass}>Selected Details</motion.p>
-          <motion.h2 variants={textRevealVariants} className="text-3xl md:text-5xl font-bold text-white tracking-tight">
-            {title}
-          </motion.h2>
-        </div>
-        <div className="h-[1px] flex-1 bg-gradient-to-r from-indigo-500/40 via-white/10 to-transparent ml-4 hidden md:block" />
-      </div>
-      {children}
-    </div>
-  </motion.section>
-);
-
 export default function PortfolioPage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [canFinishIntro, setCanFinishIntro] = useState(false);
-  const [isVideoReady, setIsVideoReady] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', message: '' });
+  const [typedRole, setTypedRole] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", message: "" });
 
   useEffect(() => {
-    if (!hasInteracted) return;
+    const targetText = "Junior Web Developer";
+    let charIndex = 0;
+    const interval = setInterval(() => {
+      setTypedRole(targetText.slice(0, charIndex + 1));
+      charIndex++;
+      if (charIndex === targetText.length) {
+        clearInterval(interval);
+      }
+    }, 80);
 
-    const minTimer = window.setTimeout(() => {
-      setCanFinishIntro(true);
-    }, INTRO_MIN_DURATION);
-
-    const maxTimer = window.setTimeout(() => {
-      setIsLoading(false);
-    }, INTRO_MAX_DURATION);
-
-    return () => {
-      window.clearTimeout(minTimer);
-      window.clearTimeout(maxTimer);
-    };
-  }, [hasInteracted]);
-
-  useEffect(() => {
-    if (canFinishIntro && isVideoReady) {
-      setIsLoading(false);
-    }
-  }, [canFinishIntro, isVideoReady]);
+    return () => clearInterval(interval);
+  }, []);
 
   const sendWhatsApp = (e: React.FormEvent) => {
     e.preventDefault();
     const url = `https://wa.me/${portfolioData.contact.whatsapp}?text=Hi Arun, I am ${formData.name}. ${formData.message}`;
-    window.open(url, '_blank');
-  };
-
-  const sendEmail = () => {
-    const mailtoUrl = `mailto:${portfolioData.contact.email}?subject=Inquiry from ${formData.name}&body=${formData.message}`;
-    window.location.href = mailtoUrl;
+    window.open(url, "_blank");
   };
 
   return (
-    <div className="min-h-screen text-gray-300 selection:bg-indigo-500/30 selection:text-white overflow-x-hidden md:p-10">      <AnimatePresence>
-        {isLoading && (
-          <motion.div 
-            key="preloader"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.02, filter: "blur(10px)" }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030712]"
-          >
-            {hasInteracted ? (
-              <>
-                <video 
-                  autoPlay 
-                  loop
-                  playsInline
-                  onLoadedData={() => setIsVideoReady(true)}
-                  className="absolute inset-0 w-full h-full object-cover opacity-75 scale-105"
-                >
-                  <source src="/BMW.MP4" type="video/mp4" />
-                </video>
+    <div className="bg-[#0e0e11] text-[#b3b3b8] min-h-screen font-sans selection:bg-[#00DF81]/30 selection:text-white relative overflow-x-hidden">
 
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.12),transparent_45%)]" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/80" />
-                
-                <motion.div 
-                   initial={{ opacity: 0, y: 18 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   exit={{ opacity: 0, y: 16 }}
-                   transition={{ duration: 0.6, delay: 0.15 }}
-                   className="relative z-10 mt-auto mb-14 flex flex-col items-center gap-4"
-                >
-                   <div className="px-6 py-2 rounded-full backdrop-blur-md bg-black/35 border border-indigo-500/20 text-indigo-200 font-mono text-xs md:text-sm tracking-[0.3em] uppercase">
-                     Compiling Assets...
-                   </div>
-                   <div className="w-36 h-[3px] rounded-full bg-white/10 overflow-hidden">
-                     <motion.div
-                       className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-cyan-400 to-white"
-                       initial={{ x: "-100%" }}
-                       animate={{ x: "100%" }}
-                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                     />
-                   </div>
-                </motion.div>
-              </>
-            ) : (
-                <motion.button 
-                   initial={{ opacity: 0, scale: 0.9 }}
-                   animate={{ opacity: 1, scale: 1 }}
-                   transition={{ duration: 0.8 }}
-                   onClick={() => setHasInteracted(true)}
-                   className="group relative px-8 py-4 rounded-full bg-gray-900/40 border border-indigo-500/30 hover:bg-indigo-500/10 hover:border-indigo-400/50 transition-all font-mono text-sm tracking-[0.1em] uppercase text-indigo-100 overflow-hidden shadow-[0_0_40px_-10px_rgba(99,102,241,0.3)] backdrop-blur-md"
-                >
-                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                   <span className="relative z-10 flex items-center gap-3">
-                      Wanna see my portfolio? <Code2 size={18} className="text-cyan-400" />
-                   </span>
-                </motion.button>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* --- Top Navigation Bar --- */}
+      <header className="fixed top-0 left-0 right-0 z-40 bg-[#0e0e11]/85 backdrop-blur-md border-b border-white/5">
+        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+          <a href="#" className="text-white font-bold text-xl tracking-wider hover:text-[#00DF81] transition-colors">
+            Arunkumar R
+          </a>
 
-      <MusicPlayer
-        autoplayEnabled={!isLoading}
-        className={`fixed right-4 md:right-8 top-[85%] md:top-1/2 -translate-y-1/2 z-[100] transition-opacity duration-1000 ${isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-      />
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <a href="#home" className="text-white hover:text-[#00DF81] transition-colors">Home</a>
+            <a href="#about" className="hover:text-[#00DF81] transition-colors">About</a>
+            <a href="#services" className="hover:text-[#00DF81] transition-colors">Services</a>
+            <a href="#portfolio" className="hover:text-[#00DF81] transition-colors">Portfolio</a>
+            <a href="#education" className="hover:text-[#00DF81] transition-colors">Education</a>
+            <a href="#contact" className="hover:text-[#00DF81] transition-colors">Contact</a>
+          </nav>
 
-      <motion.div
-        initial={false}
-        animate={{
-          opacity: isLoading ? 0 : 1,
-          y: isLoading ? 18 : 0,
-          filter: isLoading ? "blur(10px)" : "blur(0px)",
-        }}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-        className={isLoading ? 'h-screen overflow-hidden' : ''}
-      >
-        <div className="relative max-w-6xl mx-auto">
-        {/* --- Bento Container --- */}
-        <div className="max-w-4xl mx-auto bg-gray-900/20 backdrop-blur-xl border-x-0 md:border border-gray-800/60 md:rounded-[3rem] shadow-[0_0_100px_-20px_rgba(79,70,229,0.15)] relative overflow-hidden">
-
-          {/* --- Hero Section --- */}
-          <header className="relative min-h-[70vh] flex items-center justify-center pt-20 pb-12 px-6 overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent -z-10" />
-
-          <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl text-center"
-        >
-          <div className="relative inline-flex items-center justify-center mb-8 rounded-[2.25rem] border border-white/12 bg-gradient-to-br from-white/10 via-white/5 to-transparent p-3 md:p-4 shadow-[0_30px_90px_-42px_rgba(99,102,241,0.55)] backdrop-blur-xl">
-            <div className="absolute inset-0 rounded-[2.25rem] bg-[linear-gradient(145deg,rgba(255,255,255,0.08),transparent_55%)] pointer-events-none" />
-            <motion.img
-              initial={{ rotate: -10 }}
-              animate={{ rotate: 0 }}
-              src={portfolioData.profilePicture}
-              alt={portfolioData.name}
-              className="relative z-10 w-44 h-44 md:w-52 md:h-52 rounded-[1.9rem] mx-auto border border-white/10 ring-1 ring-indigo-300/20 object-cover shadow-[0_18px_45px_-24px_rgba(15,23,42,0.85)]"
-              onError={(e) => { e.currentTarget.src = 'https://placehold.co/200x200/1e293b/818cf8?text=AR'; }}
-            />
-            <div className="absolute -bottom-2 -right-2 z-20 bg-gradient-to-br from-indigo-500 to-cyan-500 p-3 rounded-2xl shadow-xl border border-white/10">
-              <Code2 size={20} className="text-white" />
-            </div>
+          <div className="hidden md:flex items-center gap-4">
+            <a
+              href={portfolioData.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-white/5 text-white border border-white/10 hover:border-[#00DF81] hover:text-[#00DF81] transition-all"
+            >
+              Resume <ArrowUpRight size={14} />
+            </a>
           </div>
 
-          <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-white tracking-tighter leading-none flex flex-wrap justify-center gap-[0.3em]"
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-gray-400 hover:text-white"
           >
-            <div className="flex">
-               {portfolioData.name.split(' ')[0].split('').map((char, index) => (
-                  <motion.span 
-                     key={`first-${index}`} 
-                     initial={{ opacity: 0, y: 80, rotateX: -90, filter: "blur(10px)" }}
-                     animate={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)" }}
-                     transition={{ duration: 0.8, delay: 0.2 + index * 0.05, type: "spring", bounce: 0.4 }}
-                     className="inline-block hero-name-text"
-                  >
-                    {char}
-                  </motion.span>
-               ))}
-            </div>
-            <div className="flex">
-               {portfolioData.name.split(' ').slice(1).join(' ').split('').map((char, index) => (
-                  <motion.span 
-                     key={`last-${index}`} 
-                     initial={{ opacity: 0, y: 80, rotateX: -90, filter: "blur(10px)" }}
-                     animate={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)" }}
-                     transition={{ duration: 0.8, delay: 0.6 + index * 0.05, type: "spring", bounce: 0.4 }}
-                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-300 to-white hero-name-text"
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </motion.span>
-               ))}
-            </div>
-          </motion.h1>
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
-          <motion.p
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-10 text-balance"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            {portfolioData.summary}
-          </motion.p>
-
-          <motion.div
-            className="flex flex-wrap justify-center gap-3 mb-10"
-            initial={{ y: 24, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.35 }}
-          >
-            {attractStrip.map((item) => (
-              <span
-                key={item}
-                className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm uppercase tracking-[0.22em] text-white/85 hero-glow-chip"
-              >
-                {item}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="flex flex-wrap justify-center gap-5"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <motion.a
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(79, 70, 229, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              href={portfolioData.resumeUrl}
-              className="flex items-center gap-2 bg-white text-black px-10 py-4 rounded-2xl font-bold transition-all"
+        {/* Mobile Dropdown */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-[#141418] border-b border-white/10 px-6 py-6 flex flex-col gap-4 text-sm"
             >
-              <Download size={20} /> Resume
-            </motion.a>
-
-            <div className="flex items-center gap-3 bg-gray-900/80 backdrop-blur-md p-2 px-4 rounded-2xl border border-gray-800">
-              {[
-                { icon: <Github size={22} />, link: portfolioData.contact.github },
-                { icon: <Linkedin size={22} />, link: portfolioData.contact.linkedin },
-                { icon: <Mail size={22} />, link: `mailto:${portfolioData.contact.email}` }
-              ].map((social, i) => (
-                <a key={i} href={social.link} className="hover:text-indigo-400 transition-colors p-2 text-gray-400" target="_blank" rel="noopener noreferrer">
-                  {social.icon}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+              <a href="#home" onClick={() => setMobileMenuOpen(false)} className="text-white hover:text-[#00DF81]">Home</a>
+              <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00DF81]">About</a>
+              <a href="#services" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00DF81]">Services</a>
+              <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00DF81]">Portfolio</a>
+              <a href="#education" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00DF81]">Education</a>
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#00DF81]">Contact</a>
+              <a
+                href={portfolioData.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-center py-2.5 rounded bg-[#00DF81] text-[#0e0e11] font-bold text-xs uppercase tracking-wider"
+              >
+                Resume
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
-      <main className="pb-20">
-
-        {/* --- Skills --- */}
-        <Section id="skills" title="Expertise" icon={<Star size={28} />}>
-          <motion.div variants={itemVariants} className="max-w-3xl border-t border-white/10 pt-6">
-            <p className={sectionEyebrowClass}>Professional Summary</p>
-            <p className="mt-3 text-lg md:text-xl leading-relaxed text-gray-200 scroll-highlight-text">
-              {portfolioData.skills.intro}
+      {/* --- Hero Section --- */}
+      <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-6 border-b border-white/5">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+          
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00DF81]/10 border border-[#00DF81]/25 text-[#00DF81] text-xs font-semibold uppercase tracking-wider mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#00DF81] animate-pulse" />
+              Junior Web Developer • Next.js &amp; Modern AI
+            </div>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
+              I am <span className="text-[#00DF81]">{typedRole}</span><span className="text-[#00DF81] animate-pulse font-light">|</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-400 font-light max-w-xl mb-8 leading-relaxed">
+              Engineering clean, responsive web applications with Next.js and Express.js. Leveraging modern AI agents and models to build fast, beautiful, and intelligent web experiences.
             </p>
-          </motion.div>
 
-          <div className="grid md:grid-cols-[1.45fr_0.85fr] gap-8 md:gap-14 mt-10">
-            <motion.div variants={itemVariants} className={openPanelClass}>
-              <p className={sectionEyebrowClass}>Engineering Toolkit</p>
-              <h3 className="text-xl font-bold text-white mt-3 mb-6 flex items-center gap-2">
-                <Code2 size={18} className="text-indigo-400" /> Core Technologies
-              </h3>
-              <div className="space-y-6">
-                {portfolioData.skills.technical.map((group) => (
-                  <div key={group.title} className="grid md:grid-cols-[190px_1fr] gap-3 md:gap-6 border-t border-white/8 pt-4 first:border-t-0 first:pt-0">
-                    <p className="text-sm uppercase tracking-[0.28em] text-indigo-300/75 scroll-accent-label">{group.title}</p>
-                    <div className="flex flex-wrap gap-x-5 gap-y-2">
-                      {group.items.map((skill) => (
-                        <span key={skill} className="text-base text-white/90 skill-reveal-item">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className={openPanelClass}>
-              <p className="text-[0.7rem] uppercase tracking-[0.35em] text-cyan-300/70">Work Approach</p>
-              <h3 className="text-xl font-bold text-white mt-3 mb-6 flex items-center gap-2">
-                <User size={18} className="text-cyan-400" /> Professional Strengths
-              </h3>
-              <div className="space-y-4">
-                {portfolioData.skills.soft.map((skill) => (
-                  <div key={skill} className="border-t border-cyan-400/10 pt-4 first:border-t-0 first:pt-0 text-cyan-100 strength-row">
-                    {skill}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </Section>
-
-        {/* --- Projects --- */}
-        <Section id="projects" title="Featured Work" icon={<Briefcase size={28} />}>
-          <div className="space-y-10">
-            {portfolioData.projects.map((project, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ x: 8 }}
-                className="group grid md:grid-cols-[150px_1fr_auto] gap-4 md:gap-8 items-start border-t border-white/10 pt-8"
+            <div className="flex flex-wrap items-center gap-4 mb-14">
+              <a
+                href="#contact"
+                className="px-8 py-3.5 rounded-md bg-[#00DF81] text-[#0e0e11] font-bold text-sm tracking-wide hover:bg-[#00c974] shadow-[0_0_30px_rgba(0,223,129,0.3)] transition-all flex items-center gap-2"
               >
-                <div className="text-sm uppercase tracking-[0.35em] text-indigo-300/65">
-                  Project {String(index + 1).padStart(2, "0")}
-                </div>
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors project-focus-title">{project.title}</h3>
-                  <p className="text-gray-300 leading-relaxed max-w-2xl">{project.description}</p>
-                  <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5">
-                    {project.tech.map(t => <span key={t} className="text-xs uppercase tracking-[0.28em] text-gray-500 font-bold">{t}</span>)}
-                  </div>
-                </div>
-                <div className="pt-1">
-                  {project.liveLink && (
-                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white font-bold group/link whitespace-nowrap">
-                      Explore Project <ExternalLink size={16} className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </Section>
-
-        {/* --- Education --- */}
-        <Section id="education" title="Education" icon={<Award size={28} />}>
-          <div className="space-y-8">
-            {portfolioData.education.map((edu, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="grid md:grid-cols-[150px_1fr_auto] gap-4 md:gap-8 items-start border-t border-white/10 pt-6"
-              >
-                <span className="text-indigo-300 font-mono text-sm uppercase tracking-[0.25em]">{edu.period}</span>
-                <div>
-                  <h3 className="text-2xl font-bold text-white project-focus-title">{edu.degree}</h3>
-                  <p className="text-gray-400 mt-2">{edu.institution}</p>
-                </div>
-                <div className="inline-flex items-center justify-start md:justify-end text-sm text-indigo-200 font-bold tracking-[0.2em] uppercase">
-                  CGPA: {edu.cgpa}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </Section>
-
-        {/* --- Contact --- */}
-        <Section id="contact" title="Get In Touch" icon={<MessageCircle size={28} />}>
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-start">
-            <motion.div variants={itemVariants} className="space-y-6 border-t border-white/10 pt-6">
-              <h3 className="text-2xl font-bold text-white project-focus-title">Let&apos;s build something amazing together.</h3>
-              <p className="text-gray-400">Feel free to reach out for collaborations or just a friendly hello!</p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors">
-                  <div className="p-3 rounded-full border border-white/10"><Mail size={20} /></div>
-                  <span>{portfolioData.contact.email}</span>
-                </div>
-                <div className="flex items-center gap-4 text-gray-300 hover:text-white transition-colors">
-                  <div className="p-3 rounded-full border border-white/10"><Phone size={20} /></div>
-                  <span>{portfolioData.contact.phone}</span>
-                </div>
+                Contact Me <Send size={16} />
+              </a>
+              <div className="flex items-center gap-3 ml-2">
+                <a
+                  href={portfolioData.contact.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-3 rounded-md bg-white/5 border border-white/10 hover:border-[#00DF81] hover:text-[#00DF81] transition-colors"
+                >
+                  <Github size={18} />
+                </a>
+                <a
+                  href={portfolioData.contact.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-3 rounded-md bg-white/5 border border-white/10 hover:border-[#00DF81] hover:text-[#00DF81] transition-colors"
+                >
+                  <Linkedin size={18} />
+                </a>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.form
-              variants={itemVariants}
-              onSubmit={sendWhatsApp}
-              className="border-t border-white/10 pt-6 space-y-4"
+            {/* Quick Contact Info Strip */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-gray-500 font-bold mb-1">Email</p>
+                <p className="text-sm text-gray-300 font-medium truncate">{portfolioData.contact.email}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-widest text-gray-500 font-bold mb-1">Phone</p>
+                <p className="text-sm text-gray-300 font-medium">{portfolioData.contact.phone}</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-widest text-gray-500 font-bold mb-1">Location</p>
+                <p className="text-sm text-gray-300 font-medium">{portfolioData.contact.location}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero Portrait Photo */}
+          <div className="relative flex justify-center md:justify-end">
+            <div className="relative w-72 h-96 sm:w-80 sm:h-[460px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+              <img
+                src={portfolioData.profilePicture}
+                alt={portfolioData.name}
+                className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700"
+                onError={(e) => {
+                  e.currentTarget.src = "https://placehold.co/400x500/18181b/ffffff?text=Arun";
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e11] via-transparent to-transparent opacity-80" />
+            </div>
+
+            {/* Scroll Mouse Indicator on Side */}
+            <div className="hidden lg:flex flex-col items-center gap-2 absolute -right-12 top-1/2 -translate-y-1/2 text-gray-500">
+              <div className="w-5 h-8 rounded-full border-2 border-gray-600 flex justify-center pt-1">
+                <div className="w-1 h-2 rounded-full bg-[#00DF81] animate-bounce" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- About Me ("Who am I?") --- */}
+      <section id="about" className="py-24 px-6 border-b border-white/5">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[0.85fr_1.15fr] gap-12 items-center">
+          
+          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl">
+            <img
+              src={portfolioData.profilePicture}
+              alt={portfolioData.name}
+              className="w-full h-80 sm:h-96 object-cover object-top"
+              onError={(e) => {
+                e.currentTarget.src = "https://placehold.co/400x500/18181b/ffffff?text=Arun";
+              }}
+            />
+            <div className="absolute inset-0 bg-[#00DF81]/10 mix-blend-overlay" />
+          </div>
+
+          <div>
+            <span className="text-sm uppercase tracking-[0.25em] text-[#00DF81] font-semibold block mb-2">
+              Who am I?
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
+              {portfolioData.about.title}
+            </h2>
+            <p className="text-gray-400 leading-relaxed mb-8">
+              {portfolioData.about.description}
+            </p>
+
+            <div className="grid grid-cols-2 gap-y-4 gap-x-8 text-sm mb-8 py-6 border-y border-white/10">
+              <div>
+                <span className="text-gray-500 font-semibold block text-xs uppercase tracking-wider">Current Role:</span>
+                <span className="text-white font-medium">{portfolioData.about.role}</span>
+              </div>
+              <div>
+                <span className="text-gray-500 font-semibold block text-xs uppercase tracking-wider">Core Stack:</span>
+                <span className="text-white font-medium">{portfolioData.about.coreStack}</span>
+              </div>
+              <div>
+                <span className="text-gray-500 font-semibold block text-xs uppercase tracking-wider">AI Tooling:</span>
+                <span className="text-[#00DF81] font-medium">{portfolioData.about.aiFocus}</span>
+              </div>
+              <div>
+                <span className="text-gray-500 font-semibold block text-xs uppercase tracking-wider">Location:</span>
+                <span className="text-white font-medium">{portfolioData.about.from}</span>
+              </div>
+            </div>
+
+            <a
+              href={portfolioData.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md bg-[#00DF81] text-[#0e0e11] font-bold text-sm tracking-wide hover:bg-[#00c974] transition-all"
             >
+              <Download size={16} /> Download CV
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- Services / Expertise --- */}
+      <section id="services" className="py-24 px-6 relative border-b border-white/5 overflow-hidden">
+        {/* Outlined Watermark Text */}
+        <div className="absolute top-8 left-1/2 -translate-x-1/2 text-[5rem] md:text-[10rem] font-black uppercase text-transparent tracking-widest select-none pointer-events-none opacity-[0.03] [-webkit-text-stroke:2px_white] whitespace-nowrap">
+          SERVICES
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="mb-14">
+            <span className="text-sm uppercase tracking-[0.25em] text-[#00DF81] font-semibold block mb-2">
+              What I Offer
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+              My Services
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {portfolioData.services.map((service, index) => (
+              <div
+                key={index}
+                className="bg-[#141418] border border-white/5 p-8 rounded-xl hover:border-[#00DF81]/40 hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <div className="mb-6 p-3 w-fit rounded-lg bg-white/5 group-hover:scale-110 transition-transform">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00DF81] transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- Live Production & Client Projects --- */}
+      <section id="portfolio" className="py-24 px-6 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00DF81]/10 border border-[#00DF81]/25 text-[#00DF81] text-xs font-semibold uppercase tracking-wider mb-3">
+                <span className="w-2 h-2 rounded-full bg-[#00DF81] animate-ping" />
+                Live Client &amp; Company Projects
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-3">
+                Commercial Production Works
+              </h2>
+              <p className="text-gray-400 text-sm max-w-xl leading-relaxed">
+                Live web applications and production platforms engineered during my role as a Junior Web Developer, built with Next.js, Express.js, and modern architectures.
+              </p>
+            </div>
+          </div>
+
+          {/* 3 Live Commercial Projects Grid */}
+          <div className="grid md:grid-cols-3 gap-6 mb-20">
+            {portfolioData.liveProjects.map((project, index) => (
+              <div
+                key={index}
+                className="bg-[#141418] border border-white/10 p-8 rounded-2xl flex flex-col justify-between hover:border-[#00DF81]/50 hover:-translate-y-1 transition-all duration-300 group shadow-lg"
+              >
+                <div>
+                  <div className="flex justify-between items-start mb-5">
+                    <span className="text-xs uppercase font-mono tracking-wider text-[#00DF81] bg-[#00DF81]/10 px-3 py-1 rounded-full border border-[#00DF81]/20 font-semibold">
+                      {project.category}
+                    </span>
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg bg-white/5 text-gray-400 group-hover:text-[#00DF81] group-hover:bg-[#00DF81]/10 transition-all"
+                      title="Open Live Website"
+                    >
+                      <ExternalLink size={18} />
+                    </a>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[#00DF81] transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-[#00DF81] text-xs font-medium mb-4">
+                    Role: {project.role}
+                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5 mb-6">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-1 rounded text-xs font-semibold bg-white/5 text-gray-300 border border-white/5"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-[#00DF81] hover:text-[#0e0e11] hover:border-[#00DF81] transition-all text-xs font-bold uppercase tracking-wider"
+                  >
+                    View Live Site <ArrowUpRight size={14} />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Sub-section: College & Academic Projects */}
+          <div className="pt-12 border-t border-white/5">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+              <div>
+                <span className="text-sm uppercase tracking-[0.25em] text-gray-400 font-semibold block mb-2">
+                  Academic Foundation &amp; Self-Study
+                </span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                  College &amp; Hands-On Lab Projects
+                </h3>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {portfolioData.academicProjects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-[#141418]/60 border border-white/5 p-7 rounded-2xl flex flex-col justify-between hover:border-white/20 transition-all group"
+                >
+                  <div>
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="text-xs uppercase font-mono tracking-wider text-gray-400 bg-white/5 px-2.5 py-1 rounded border border-white/10">
+                        {project.category}
+                      </span>
+                      {project.liveLink && project.liveLink !== "#" && (
+                        <a
+                          href={project.liveLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1.5 rounded-md bg-white/5 text-gray-400 hover:text-white transition-colors"
+                        >
+                          <ExternalLink size={15} />
+                        </a>
+                      )}
+                    </div>
+
+                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-[#00DF81] transition-colors">
+                      {project.title}
+                    </h4>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-0.5 rounded text-xs font-semibold bg-white/5 text-gray-400"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* --- Education Section --- */}
+      <section id="education" className="py-24 px-6 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <span className="text-sm uppercase tracking-[0.25em] text-[#00DF81] font-semibold block mb-2">
+            Academic Background
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-12">
+            Education
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {portfolioData.education.map((edu, index) => (
+              <div key={index} className="bg-[#141418] border border-white/5 p-8 rounded-xl">
+                <div className="flex items-center gap-3 mb-4 text-[#00DF81]">
+                  <GraduationCap size={22} />
+                  <span className="text-xs font-mono tracking-wider text-gray-400">{edu.period}</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{edu.degree}</h3>
+                <p className="text-gray-400 text-sm mb-4">{edu.institution}</p>
+                <span className="inline-block px-3 py-1 rounded bg-[#00DF81]/10 text-[#00DF81] text-xs font-bold">
+                  {edu.cgpa}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- Contact Section --- */}
+      <section id="contact" className="py-24 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <span className="text-sm uppercase tracking-[0.25em] text-[#00DF81] font-semibold block mb-2">
+              Let&apos;s Talk
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-6">
+              Get In Touch
+            </h2>
+            <p className="text-gray-400 leading-relaxed mb-8 max-w-md">
+              Looking for a dedicated developer to build your next web application? Send a message and let&apos;s collaborate.
+            </p>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-4 text-gray-300">
+                <div className="p-3 bg-white/5 rounded-lg text-[#00DF81]">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Email</p>
+                  <p className="text-white font-medium">{portfolioData.contact.email}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 text-gray-300">
+                <div className="p-3 bg-white/5 rounded-lg text-[#00DF81]">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Phone / WhatsApp</p>
+                  <p className="text-white font-medium">{portfolioData.contact.phone}</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 text-gray-300">
+                <div className="p-3 bg-white/5 rounded-lg text-[#00DF81]">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Location</p>
+                  <p className="text-white font-medium">{portfolioData.contact.location}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Message Form */}
+          <form onSubmit={sendWhatsApp} className="bg-[#141418] border border-white/5 p-8 rounded-2xl space-y-4">
+            <h3 className="text-xl font-bold text-white mb-2">Send a Message</h3>
+            <div>
+              <label className="text-xs uppercase tracking-wider text-gray-400 font-semibold block mb-2">Your Name</label>
               <input
                 type="text"
-                placeholder="Name"
                 required
-                className="w-full bg-[#030712] border border-gray-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                placeholder="John Doe"
+                className="w-full bg-[#0e0e11] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00DF81] transition-colors"
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
+            </div>
+            <div>
+              <label className="text-xs uppercase tracking-wider text-gray-400 font-semibold block mb-2">Message</label>
               <textarea
-                placeholder="How can I help you?"
                 rows={4}
                 required
-                className="w-full bg-[#030712] border border-gray-800 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                placeholder="Hi Arun, I'd like to discuss a project..."
+                className="w-full bg-[#0e0e11] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00DF81] transition-colors"
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              ></textarea>
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3.5 rounded-lg bg-[#00DF81] text-[#0e0e11] font-bold text-sm tracking-wider uppercase hover:bg-[#00c974] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            >
+              Send via WhatsApp <Send size={16} />
+            </button>
+          </form>
+        </div>
+      </section>
 
-              <div className="grid grid-cols-2 gap-4">
-                <button type="submit" className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-4 rounded-2xl transition-all shadow-lg text-sm">
-                  <MessageCircle size={18} /> WhatsApp
-                </button>
-                <button type="button" onClick={sendEmail} className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg text-sm">
-                  <Mail size={18} /> Gmail
-                </button>
-              </div>
-            </motion.form>
-          </div>
-        </Section>
-      </main>
-
-      <footer className="py-6 text-center border-t border-gray-900/50">
-        <p className="text-gray-500 text-sm font-medium">&copy; {new Date().getFullYear()} {portfolioData.name} • Designed for Excellence</p>
+      {/* --- Footer --- */}
+      <footer className="py-8 text-center border-t border-white/5 text-gray-600 text-xs tracking-wider uppercase">
+        © {new Date().getFullYear()} {portfolioData.name}. All Rights Reserved.
       </footer>
-        </div>
-        </div>
-      </motion.div>
     </div>
   );
 }

@@ -7,8 +7,13 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Arunkumar R | Portfolio",
-  description: "Portfolio of Arunkumar R - Full Stack Developer",
+  title: "Arunkumar R | Junior Web Developer",
+  description: "Portfolio of Arunkumar R - Junior Web Developer specializing in Next.js, Express.js, and Modern AI.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
