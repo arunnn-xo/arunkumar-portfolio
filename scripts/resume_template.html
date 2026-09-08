@@ -1,0 +1,446 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arunkumar R - Resume</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 8mm 11mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #111827;
+      background: #ffffff;
+      line-height: 1.32;
+      font-size: 8.6pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    a {
+      color: #047857;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    /* Header */
+    header {
+      text-align: center;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #047857;
+      margin-bottom: 7px;
+    }
+    h1 {
+      font-size: 19pt;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #0f172a;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+    .title {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #047857;
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+    }
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2px 8px;
+      font-size: 7.9pt;
+      color: #374151;
+    }
+    .contact-bar span {
+      display: inline-flex;
+      align-items: center;
+    }
+    /* Section Headings */
+    section {
+      margin-bottom: 7px;
+    }
+    .section-title {
+      font-size: 9.4pt;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      border-bottom: 1.2px solid #e5e7eb;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 3.5px;
+      height: 10.5px;
+      background-color: #047857;
+      border-radius: 2px;
+    }
+    /* Profile Summary */
+    .summary-text {
+      font-size: 8.5pt;
+      color: #374151;
+      text-align: justify;
+      line-height: 1.34;
+    }
+    /* Skills Grid */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+    }
+    .skills-table td {
+      padding: 2px 0;
+      vertical-align: top;
+    }
+    .skills-label {
+      font-weight: 700;
+      color: #1f2937;
+      width: 105px;
+      white-space: nowrap;
+    }
+    .skills-val {
+      color: #374151;
+    }
+    /* Work & Experience */
+    .item-block {
+      margin-bottom: 3px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0px;
+    }
+    .item-title {
+      font-size: 8.9pt;
+      font-weight: 700;
+      color: #111827;
+    }
+    .item-subtitle {
+      font-size: 8.4pt;
+      font-weight: 600;
+      color: #047857;
+    }
+    .item-date {
+      font-size: 7.9pt;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    .tech-pill {
+      font-size: 7.4pt;
+      color: #4b5563;
+      font-weight: 600;
+      display: inline-block;
+      margin-top: 1px;
+    }
+    ul.bullet-list {
+      list-style-type: disc;
+      margin-left: 13px;
+      margin-top: 1px;
+    }
+    ul.bullet-list li {
+      font-size: 8.2pt;
+      color: #374151;
+      margin-bottom: 1px;
+      line-height: 1.28;
+    }
+    /* Side-by-side Project Categories */
+    .projects-dual-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+    .cat-heading {
+      font-size: 8.3pt;
+      font-weight: 800;
+      color: #047857;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .project-card {
+      background: #fafafa;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      padding: 3.5px 5.5px;
+      margin-bottom: 3.5px;
+    }
+    .project-card:last-child {
+      margin-bottom: 0;
+    }
+    /* Education in two columns */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .edu-card {
+      background: #fafafa;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      padding: 4px 6px;
+    }
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 8.2pt;
+    }
+    .edu-degree {
+      font-weight: 700;
+      color: #111827;
+      font-size: 8.3pt;
+    }
+    .edu-school {
+      font-size: 7.7pt;
+      color: #4b5563;
+      margin-top: 1px;
+    }
+    .edu-badge {
+      font-size: 7.6pt;
+      font-weight: 700;
+      color: #047857;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 0px 4px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>Arunkumar R</h1>
+      <div class="title">Junior Web Developer • Next.js &amp; AI-Driven Modern UI</div>
+      <div class="contact-bar">
+        <span>📧 <a href="mailto:arunkumarr09032003@gmail.com">arunkumarr09032003@gmail.com</a></span>
+        <span>•</span>
+        <span>📞 <a href="tel:+919025604721">+91 90256 04721</a></span>
+        <span>•</span>
+        <span>📍 Coimbatore, Tamil Nadu</span>
+        <span>•</span>
+        <span>🌐 <a href="https://arunkumar-portfolio-peach.vercel.app/" target="_blank">Portfolio</a></span>
+        <span>•</span>
+        <span>💻 <a href="https://github.com/charlie-xo?tab=packages" target="_blank">GitHub</a></span>
+        <span>•</span>
+        <span>🔗 <a href="https://linkedin.com" target="_blank">LinkedIn</a></span>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section>
+      <div class="section-title">Professional Summary</div>
+      <p class="summary-text">
+        Junior Web Developer skilled in creating clean, modern, and responsive user interfaces using <strong>Next.js</strong> and <strong>AI Agents</strong>. Experienced in building mobile-friendly web layouts, developing backend APIs using <strong>Express.js</strong>, and managing databases with <strong>Supabase</strong> and <strong>MySQL</strong>. Proven track record building live client platforms as well as solid academic and learning projects.
+      </p>
+    </section>
+
+    <!-- Web Development Experience -->
+    <section>
+      <div class="section-title">Web Development Experience</div>
+      <div class="item-block">
+        <div class="item-header">
+          <div>
+            <span class="item-title">Junior Web Developer</span> — <span class="item-subtitle">Next.js &amp; Modern UI Development</span>
+          </div>
+          <div class="item-date">Coimbatore, India | 2024 – Present</div>
+        </div>
+        <ul class="bullet-list">
+          <li>Build clean, responsive, and mobile-friendly web interfaces using <strong>Next.js</strong> and modern design practices.</li>
+          <li>Leverage <strong>AI Agents</strong> (Claude, ChatGPT, Gemini) to design, structure, and refine modern UI components quickly.</li>
+          <li>Develop backend APIs using <strong>Express.js</strong> and manage databases using <strong>Supabase</strong> and <strong>MySQL</strong>.</li>
+          <li>Contributed to live web projects including <strong>Yamora Resorts</strong>, <strong>Jams Marine Academy</strong>, and supporting tasks on <strong>Naveenam Naturals</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Projects Section: Side-by-Side (Live Client vs. College & Learning) -->
+    <section>
+      <div class="section-title">Projects (Live Client &amp; Academic/Learning)</div>
+      
+      <div class="projects-dual-col">
+        
+        <!-- Column 1: Live Client Projects -->
+        <div>
+          <div class="cat-heading">🌐 Live Client Projects</div>
+
+          <!-- 1. Yamora Resorts -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">1. Yamora Resorts</span>
+              <span class="item-date"><a href="https://yamoraresorts.com/" target="_blank">yamoraresorts.com ↗</a></span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">Next.js &amp; Express.js Developer (Live Website)</div>
+            <ul class="bullet-list">
+              <li>Luxury resort website with room showcases, amenities, and dynamic booking inquiries.</li>
+              <li>Built Express.js backend API endpoints for inquiries.</li>
+            </ul>
+            <div class="tech-pill">Next.js, Express.js</div>
+          </div>
+
+          <!-- 2. Jams Marine Academy -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">2. Jams Marine Academy</span>
+              <span class="item-date"><a href="https://jamsmarine.edu.in/" target="_blank">jamsmarine.edu.in ↗</a></span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">Frontend Next.js Developer (Live Website)</div>
+            <ul class="bullet-list">
+              <li>Modern educational portal with course catalogs and cadet admission inquiry forms.</li>
+              <li>Delivered 100% mobile-friendly responsive UI layout.</li>
+            </ul>
+            <div class="tech-pill">Next.js, AI Agents, Modern UI</div>
+          </div>
+
+          <!-- 3. Naveenam Naturals -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">3. Naveenam Naturals</span>
+              <span class="item-date"><a href="https://naveenamnaturals.com/" target="_blank">naveenamnaturals.com ↗</a></span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">Supporting Web Developer (Supporting Task)</div>
+            <ul class="bullet-list">
+              <li>Supported frontend for organic herbal e-commerce storefront.</li>
+              <li>Product catalog filtering updates and mobile checkout support.</li>
+            </ul>
+            <div class="tech-pill">Next.js, Supporting Task</div>
+          </div>
+        </div>
+
+        <!-- Column 2: College & Self-Learning Projects -->
+        <div>
+          <div class="cat-heading">🎓 College &amp; Self-Learning Projects</div>
+
+          <!-- 4. Uzhavar Sandhai -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">4. Uzhavar Sandhai</span>
+              <span class="item-date"><a href="https://uzhavar-sandhai-cbe.vercel.app" target="_blank">Live Demo ↗</a></span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">M.Sc. Academic E-Commerce Project</div>
+            <ul class="bullet-list">
+              <li>Direct farmer-to-consumer marketplace with product listings, cart, and order flow.</li>
+              <li>User login and data storage powered by Supabase.</li>
+            </ul>
+            <div class="tech-pill">Next.js, Supabase</div>
+          </div>
+
+          <!-- 5. Smart Notes App -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">5. Smart Notes Web App</span>
+              <span class="item-date"><a href="https://notes-project-nine.vercel.app/login" target="_blank">Live Demo ↗</a></span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">Full-Stack Learning Lab</div>
+            <ul class="bullet-list">
+              <li>Private note-taking web application with user authentication and note storage.</li>
+            </ul>
+            <div class="tech-pill">Next.js, Supabase</div>
+          </div>
+
+          <!-- 6. Text-to-Image AI Engine -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">6. Text-to-Image AI Engine</span>
+              <span class="item-date">AI Lab</span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">Self-Learning Project</div>
+            <ul class="bullet-list">
+              <li>Generative AI web app creating images from user prompts using AI APIs.</li>
+            </ul>
+            <div class="tech-pill">Next.js, AI Integration</div>
+          </div>
+
+          <!-- 7. College E-Commerce Website (B.Sc. Project) -->
+          <div class="project-card">
+            <div class="item-header">
+              <span class="item-title">7. College E-Commerce</span>
+              <span class="item-date">B.Sc. Project</span>
+            </div>
+            <div class="item-subtitle" style="font-size: 7.7pt;">B.Sc. Academic Project</div>
+            <ul class="bullet-list">
+              <li>Functional e-commerce site with product catalog, cart flow, and MySQL database.</li>
+            </ul>
+            <div class="tech-pill">HTML, CSS, JavaScript, MySQL</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <div class="section-title">Technical Skills</div>
+      <table class="skills-table">
+        <tr>
+          <td class="skills-label">Frontend:</td>
+          <td class="skills-val"><strong>Next.js</strong> &amp; Modern UI Development using <strong>AI Agents</strong> (Claude, ChatGPT, Gemini)</td>
+        </tr>
+        <tr>
+          <td class="skills-label">Backend:</td>
+          <td class="skills-val"><strong>Express.js</strong></td>
+        </tr>
+        <tr>
+          <td class="skills-label">Databases:</td>
+          <td class="skills-val"><strong>Supabase</strong>, <strong>MySQL</strong></td>
+        </tr>
+        <tr>
+          <td class="skills-label">Tools:</td>
+          <td class="skills-val">Git, GitHub, VS Code</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Education (2 Columns without Certification) -->
+    <section>
+      <div class="section-title">Education</div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-row">
+            <div>
+              <div class="edu-degree">M.Sc. Information Technology</div>
+              <div class="edu-school">Hindusthan College of Arts &amp; Science, Coimbatore</div>
+            </div>
+            <div style="text-align: right;">
+              <span class="edu-badge">7.9 CGPA</span>
+              <div style="font-size: 7.5pt; color: #6b7280; margin-top: 1px;">2023 – 2025</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-row">
+            <div>
+              <div class="edu-degree">B.Sc. Information Technology</div>
+              <div class="edu-school">Erode Arts and Science College, Erode</div>
+            </div>
+            <div style="text-align: right;">
+              <span class="edu-badge">7.5 CGPA</span>
+              <div style="font-size: 7.5pt; color: #6b7280; margin-top: 1px;">2020 – 2023</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

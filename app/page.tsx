@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Github,
   Linkedin,
@@ -127,7 +128,7 @@ const portfolioData = {
       title: "Notes Web App",
       category: "Full-Stack Learning Lab",
       description: "Private notes app exploring state management and secure access rules with Supabase Auth.",
-      tech: ["Next.js", "Supabase Auth", "PostgreSQL"],
+      tech: ["Next.js", "Supabase", "Tailwind CSS"],
       liveLink: "https://notes-project-nine.vercel.app/login",
     },
     {
@@ -206,14 +207,12 @@ export default function PortfolioPage() {
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href={portfolioData.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/resume"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-xs font-semibold uppercase tracking-wider bg-white/5 text-white border border-white/10 hover:border-[#00DF81] hover:text-[#00DF81] transition-all"
             >
               Resume <ArrowUpRight size={14} />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -242,14 +241,13 @@ export default function PortfolioPage() {
               <a href="#portfolio" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-[#00DF81] py-1">Portfolio</a>
               <a href="#education" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-[#00DF81] py-1">Education</a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-[#00DF81] py-1">Contact</a>
-              <a
-                href={portfolioData.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/resume"
+                onClick={() => setMobileMenuOpen(false)}
                 className="mt-2 text-center py-2.5 rounded-lg bg-[#00DF81] text-[#0e0e11] font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#00DF81]/20"
               >
-                Download Resume
-              </a>
+                View &amp; Download Resume
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>
